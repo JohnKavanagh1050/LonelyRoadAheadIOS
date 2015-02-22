@@ -6,14 +6,13 @@ var width;var height;
 
 function Game ()
 {
-	this.loopSound = new Audio("music.mp3");
+	this.loopSound = new Audio("assets/music.mp3");
 	this.loopSound.volume = .1;
 }
 
 Game.prototype.initWorld = function()
 {
    	player = new Player();
-   	player.create_food();
 }
 
 Game.prototype.initCanvas=function () { 
