@@ -7,7 +7,7 @@ var width;var height;
 function Game ()
 {
 	this.loopSound = new Audio("assets/music.mp3");
-	this.loopSound.volume = .1;
+	this.loopSound.volume = .5;
 }
 
 Game.prototype.initWorld = function()
@@ -19,8 +19,11 @@ Game.prototype.initCanvas=function () {
 	
 	var canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
+	canvas.width = 800;
+	canvas.height = 480;
 	width = canvas.getAttribute("width");
 	height = canvas.getAttribute("height");
+	
 
 
 	if (touchable) {

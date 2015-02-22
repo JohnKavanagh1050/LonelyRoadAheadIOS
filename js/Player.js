@@ -1,5 +1,6 @@
-var snake_array;
-var direction;
+
+var width = 40;
+var heigt = 40;
 var food;
 var score = 0;
 var dead = false;
