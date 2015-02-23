@@ -1,5 +1,7 @@
 GameScene.prototype = new Scene("GameScene");  	// Here's where the inheritance occurs 
 
+var game;
+
 function GameScene(){
 	game= new Game();
 
@@ -17,5 +19,5 @@ function GameScene(){
 	//start game loop
 	game.gameLoop();
 	if(typeof game_loop != "undefined") clearInterval(game_loop);
-		game_loop = setInterval(game.gameLoop, 60);
+		game_loop = setInterval(game.gameLoop, 16);
 }

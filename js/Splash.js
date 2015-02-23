@@ -12,13 +12,6 @@ Splash.prototype.initCanvas = function(){
 	width = canvas.getAttribute("width");
 	height = canvas.getAttribute("height");
 
-	if (touchable) {
-		canvas.addEventListener( 'touchstart', onTouchStart, false );
-	} else {
-		console.log("not touchable");
-		canvas.addEventListener("click", false);
-	};
-
 	var splashImg = new Image();
 	splashImg.src = 'assets/splash.png';
 
@@ -38,4 +31,5 @@ Splash.prototype.initCanvas = function(){
 
 Splash.prototype.draw = function(){
 	ctx.drawImage(splashImg, 0, 0);
+	console.log("looping draw splash statement ")
 }

@@ -5,7 +5,6 @@ function SceneManager()
 	this.sceneArray.push( new SplashScene() );
 	this.sceneArray.push( new MenuScene() );
 	this.sceneArray.push( new GameScene() );
-	this.clicked = false;
 	this.i = 0;
 }
 
@@ -23,16 +22,13 @@ SceneManager.prototype.goToNextScene = function(e)
 
 SceneManager.prototype.goToScene = function(title1)
 {
-	if (title1 == "SplashScene")
-	{
+	if (title1 == "SplashScene"){
 		this.i =0;
 	} 
-	if (title1 == "MenuScene")
-	{
+	if (title1 == "MenuScene"){
 		this.i=1;
 	}
-	if (title1 == "GameScene")
-	{
+	if (title1 == "GameScene"){
 		this.i=2;
 	}
 }

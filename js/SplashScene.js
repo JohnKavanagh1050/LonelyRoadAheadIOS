@@ -1,5 +1,7 @@
 SplashScene.prototype = new Scene("SplashScene");       			// Here's where the inheritance occurs 
 
+var splash;
+
 function SplashScene()
 {
 	splash= new Splash();
