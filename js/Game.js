@@ -132,6 +132,7 @@ Game.prototype.checkCollisions=function (){
 		androidPlayer.setOnSurface(false);
 	}
 
+	/*
 	if ((androidPlayer.getXPos() + androidPlayer.getWidth()) > (canvas.width-5)){
 		androidPlayer.setCollidingRight(true);
 		androidPlayer.setPosition(canvas.width - prettynessOffset - androidPlayer.getWidth(), androidPlayer.getYPos());
@@ -144,6 +145,7 @@ Game.prototype.checkCollisions=function (){
 	} else{
 		androidPlayer.setCollidingLeft(false);
 	}
+	*/
 
 	if ((Math.abs(androidPlayer.getYPos() - (player.getYPos() + player.getWidth())) < 5) && 
 		((player.getXPos() + player.getWidth()) > androidPlayer.getXPos())					 &&
@@ -154,6 +156,9 @@ Game.prototype.checkCollisions=function (){
 	}else{
 		androidPlayer.setCollidingTop(false);
 	}
+
+
+	//androidPlayer.setPosition(recievedXFromServer, recievedYFromServer);
 }
 
 Game.prototype.gameLoop = function () {
