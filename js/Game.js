@@ -100,7 +100,7 @@ Game.prototype.checkCollisions=function (){
 	if ((player.getXPos() + player.getWidth()) > (canvas.width-5)){ // if the player is touching the rightmost edge
 		player.setCollidingRight(true);
 		player.setPosition(canvas.width - prettynessOffset - player.getWidth(), player.getYPos());
-	}else if ( 	(player.getXPos() + player.getWidth() > (androidPlayer.getXPos() - 3)) &&
+	}else if ( 	(androidPlayer.getXPos() - (player.getXPos() + player.getWidth()) < 5) &&
 				((player.getYPos() + player.getWidth()) - (androidPlayer.getYPos())>2) ){ // if the player is colliding with the other player from the left
 		player.setCollidingRight(true);
 	}else{
@@ -110,7 +110,7 @@ Game.prototype.checkCollisions=function (){
 	if (player.getXPos() < 5){//if the player is colliding with the left wall
 		player.setCollidingLeft(true);
 		player.setPosition(prettynessOffset, player.getYPos());
-	}else if ( 	(player.getXPos() - (androidPlayer.getXPos() + androidPlayer.getWidth()) < 5) &&
+	}else if ( 	(player.getXPos() - (androidPlayer.getXPos() + androidPlayer.getWidth()) > 5) &&
 				((player.getYPos() + player.getWidth()) - (androidPlayer.getYPos())>2) ){ // if the player is colliding with the other player from the left
 		player.setCollidingLeft(true);
 	}else{
@@ -118,7 +118,8 @@ Game.prototype.checkCollisions=function (){
 	}
 
 	if ((Math.abs(player.getYPos() - (androidPlayer.getYPos() + androidPlayer.getWidth())) < 5) && 
-		(Math.abs(player.getXPos() - (androidPlayer.getXPos() + androidPlayer.getWidth())) < 5)){ //The Android Player is on top of the javascript player
+		((androidPlayer.getXPos() + androidPlayer.getWidth()) > player.getXPos())					 &&
+		(androidPlayer.getXPos() < (player.getXPos() + player.getWidth() )) ){ //The Android Player is on top of the javascript player
 		player.setCollidingTop(true);
 	}else{
 		player.setCollidingTop(false);
@@ -152,7 +153,7 @@ Game.prototype.checkCollisions=function (){
 		(player.getXPos() < (androidPlayer.getXPos() + androidPlayer.getWidth() )) ){ //The javascript Player is on top of the android player
 		androidPlayer.setCollidingTop(true);
 		player.setOnSurface(true);
-		player.setPosition(player.getXPos(), (androidPlayer.getYPos() - prettynessOffset - player.getWidth()) );
+		player.setPosition(player.getXPos(), (androidPlayer.getYPos() - prettynessOffset - player.getWidth()) ); 
 	}else{
 		androidPlayer.setCollidingTop(false);
 	}
