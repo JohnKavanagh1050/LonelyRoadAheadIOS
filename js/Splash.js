@@ -1,35 +1,26 @@
 var splashImg;
 var ctx;
+var aspectRatioWidth;
+var aspectRatioHeight;
 
 function Splash(){
-	this.loopSound = new Audio("assets/mainMenuMusic.mp3");
-	this.loopSound.volume = .1;
 }
 
 Splash.prototype.initCanvas = function(){
 	var canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
-	width = canvas.getAttribute("width");
-	height = canvas.getAttribute("height");
 
-	var splashImg = new Image();
-	splashImg.src = 'assets/splash.png';
+	splashImg = new Image();
+	splashImg.src = "assets/splash.png"
 
-	splashImg.onload = function() {
-        ctx.drawImage(splashImg, 0, 0);
-	};
-
-	this.loopSound.addEventListener('ended',function()
-	{
-		splash.loopSound.currentTime=0;
-		splash.loopSound.play();
-	},false);
-
-
-	this.loopSound.play();
+	aspectRatioWidth = this.screenWidth/canvas.getAttribute("width");
+	aspectRatioHeight = this.screenHeight/canvas.getAttribute("height");
 }
 
 Splash.prototype.draw = function(){
-	ctx.drawImage(splashImg, 0, 0);
-	console.log("looping draw splash statement ")
+	ctx.fillStyle = "white";
+	ctx.fillRect(0, 0, canvas.getAttribute("width") /** aspectRatioWidth*/, canvas.getAttribute("height") /* * aspectRatioHeight*/);
+	ctx.strokeStyle = "black";
+	ctx.strokeRect(0, 0, canvas.getAttribute("width") /* * aspectRatioWidth*/, canvas.getAttribute("height") /* * aspectRatioHeight */);
+	ctx.drawImage(splashImg, 287 /* * aspectRatioWidth*/, 127 /* * aspectRatioHeight*/);
 }

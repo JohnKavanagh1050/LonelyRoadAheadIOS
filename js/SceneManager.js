@@ -1,5 +1,6 @@
-function SceneManager()
-{
+var sceneArray;
+
+function SceneManager(){
 	this.sceneArray = [];
 
 	this.sceneArray.push( new SplashScene() );
@@ -8,20 +9,12 @@ function SceneManager()
 	this.i = 0;
 }
 
-SceneManager.prototype.addScene = function()
-{
-
-}
-
-SceneManager.prototype.goToNextScene = function(e)
-{
-	//console.log("goToNextScene");
+SceneManager.prototype.goToNextScene = function(e){
 	this.i = (this.i + 1) % this.sceneArray.length;
 }
 
 
-SceneManager.prototype.goToScene = function(title1)
-{
+SceneManager.prototype.goToScene = function(title1){
 	if (title1 == "SplashScene"){
 		this.i =0;
 	} 
@@ -33,8 +26,7 @@ SceneManager.prototype.goToScene = function(title1)
 	}
 }
 
-SceneManager.prototype.getScene = function(e)
-{
+SceneManager.prototype.getScene = function(e){
 	if (this.i == 0) 
 		return this.sceneArray[0];
 	if (this.i == 1) 

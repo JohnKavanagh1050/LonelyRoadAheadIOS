@@ -102,7 +102,7 @@ Player.prototype.setCollidingTop = function(x){
 	this.collidingTop = x;
 }
 
-
+//Draw method for player
 Player.prototype.drawPlayer = function(x,y, color){ //Draw method for the player class
 	ctx.fillStyle = color;
 	ctx.fillRect(x, y, this.playerWidth, this.playerWidth);
