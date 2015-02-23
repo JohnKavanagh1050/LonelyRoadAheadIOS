@@ -5,7 +5,7 @@ function SplashScene()
 	
 }
 
-OpeningScene.prototype.draw = function()
+SplashScene.prototype.draw = function()
 {
 	game.ctx.font = "100px Jing Jing";
 	game.ctx.fillText("Level 1",400,450);

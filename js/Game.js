@@ -7,12 +7,12 @@ var width;var height;
 function Game ()
 {
 	this.loopSound = new Audio("assets/music.mp3");
-	this.loopSound.volume = .5;
+	this.loopSound.volume = .0;
 }
 
 Game.prototype.initWorld = function()
 {
-   	player = new Player();
+   	player = new Player(20, 20);
 }
 
 Game.prototype.initCanvas=function () { 
@@ -23,7 +23,7 @@ Game.prototype.initCanvas=function () {
 	canvas.height = 480;
 	width = canvas.getAttribute("width");
 	height = canvas.getAttribute("height");
-	
+
 
 
 	if (touchable) {
@@ -42,50 +42,65 @@ Game.prototype.initCanvas=function () {
 	this.loopSound.play();
 }
 
-Game.prototype.update = function ()
-{
-	if(KeyController.isKeyDown(Key.LEFT))
-	{
-		if (player.getDirection() != "right")
-		{
-			player.setDirection("left");
-		}       
-	}
-	if(KeyController.isKeyDown(Key.RIGHT))
-	{
-		if (player.getDirection() != "left")
-		{
-			player.setDirection("right");
-		}   
-	}
+Game.prototype.update = function (){
 	if(KeyController.isKeyDown(Key.UP))
 	{
-		if (player.getDirection() != "down")
-		{
-			player.setDirection("up");
-		}   
-	}
-	if(KeyController.isKeyDown(Key.DOWN))
-	{
-		if (player.getDirection() != "up")
-		{
-			player.setDirection("down");
+		if (player.getOnSurface()){
+			player.setOnSurface(false);
+			player.setYVelocity(-5);
 		}
-	}	
+	}
+	
+	if(!player.getCollidingLeft()){
+		if(KeyController.isKeyDown(Key.LEFT)){
+			if(player.getOnSurface()){
+				player.setXVelocity(-10);
+			}
+			else{
+				player.setXVelocity(-5);
+			}
+		}
+	}
+	
+	if(!player.getCollidingRight()){
+		if(KeyController.isKeyDown(Key.RIGHT)){
+			if(player.getOnSurface()){
+				player.setXVelocity(10);
+			}
+			else{
+				player.setXVelocity(5);
+			}
+		}
+	}
 }
 
 function onTouchDown(e){
 	touches = e.touches;
 }
 
-Game.prototype.collisionResponse=function (e)
-{
-	
-	
+Game.prototype.checkCollisions=function (){
+	if ((player.getYPos() + player.getWidth()) > (canvas.height - 5)){
+		player.setOnSurface(true);
+	} else{
+		player.setOnSurface(false);
+	}
+
+	if ((player.getXPos() + player.getWidth()) > (canvas.width-5)){
+		player.setCollidingRight(true);
+	} else{
+		player.setCollidingRight(false);
+	}
+
+	if (player.getXPos() < 5){
+		player.setCollidingLeft(true);
+	} else{
+		player.setCollidingLeft(false);
+	}
 }
 
 Game.prototype.gameLoop = function () 
 {
+	game.checkCollisions();
 	game.update();
 	game.draw();
 	player.update();
@@ -98,12 +113,3 @@ Game.prototype.draw =function ()
 	ctx.strokeStyle = "black";
 	ctx.strokeRect(0, 0, width, height);
 }
-
-Game.prototype.drawCell = function(x,y)
-{
-	ctx.fillStyle = "blue";
-	ctx.fillRect(x*cellWidth, y*cellWidth, cellWidth, cellWidth);
-	ctx.strokeStyle = "white";
-	ctx.strokeRect(x*cellWidth, y*cellWidth, cellWidth, cellWidth);
-};
-
