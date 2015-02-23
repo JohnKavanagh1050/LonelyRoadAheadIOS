@@ -112,6 +112,6 @@ Player.prototype.drawPlayer = function(x,y, color){ //Draw method for the player
 
 Player.prototype.getInfo = function(){
 	this.sendInfo = [];
-	sendInfo = [xPos, yPos, xVelocity, yVelocity];
+	sendInfo = [xPos, yPos];
 	return sendInfo;
 }

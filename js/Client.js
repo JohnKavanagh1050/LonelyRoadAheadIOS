@@ -25,7 +25,6 @@ Client.prototype.join = function(name)
   data.type="join";
   data.pid=name;
   this.ws.send(JSON.stringify(data));
-
 }
 
 
@@ -33,13 +32,10 @@ Client.prototype.join = function(name)
 Client.prototype.send = function(movedPositions)
 {
   console.log("game.net was sent something")
-  console.log(movedPositions)
   var data={};    
-  data.type="pieceMovement";
-  data.prevX = movedPositions[0];
-  data.prevY = movedPositions[1];
-  data.newX = movedPositions[2];
-  data.newY = movedPositions[3];
+  data.type="updateLogic";
+  data.xPos = movedPositions[0];
+  data.yPos = movedPositions[1];
   
   game.net.ws.send(JSON.stringify(data));
 }

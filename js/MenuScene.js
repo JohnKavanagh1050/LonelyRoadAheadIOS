@@ -6,15 +6,23 @@ var menu;
 function MenuScene()
 {
 	title = "menuScene";
-	var fps = 20;
-	menu= new Menu();
-
-	menu.initCanvas();
-	ctx.clearRect(0,0,canvas.width, canvas.height);
-
-	setInterval(onTimerTick, 1000/fps); 
-
-	function onTimerTick() {
-		menu.update();
-	}
 }
+
+MenuScene.prototype.setCurrentScene = function(pCurrentScene){
+	if (pCurrentScene){
+		var fps = 20;
+		menu= new Menu();
+
+		menu.initCanvas();
+		ctx.clearRect(0,0,canvas.width, canvas.height);
+
+		setInterval(onTimerTick, 1000/fps); 
+
+		function onTimerTick() {
+			menu.update();
+		}
+	}
+
+	this.isCurrentScene = pCurrentScene;
+}
+
