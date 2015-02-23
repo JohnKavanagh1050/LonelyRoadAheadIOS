@@ -1,17 +1,16 @@
 var ctx;
 var player;
-var cellWidth = 10;
+var androidPlayer;
 var score;
-var width;var height;
 
-function Game ()
-{
+function Game (){
 	this.loopSound = new Audio("assets/music.mp3");
 	this.loopSound.volume = .0;
 }
 
-Game.prototype.initWorld = function()
-{
+Game.prototype.initWorld = function(){
+   	//Here is where we will have to read in the starting position of the android player
+   	androidPlayer = new Player(720,420);
    	player = new Player(20, 20);
 }
 
@@ -19,12 +18,8 @@ Game.prototype.initCanvas=function () {
 	
 	var canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
-	canvas.width = 800;
-	canvas.height = 480;
 	width = canvas.getAttribute("width");
 	height = canvas.getAttribute("height");
-
-
 
 	if (touchable) {
 		canvas.addEventListener( 'touchstart', onTouchStart, false );
@@ -43,15 +38,24 @@ Game.prototype.initCanvas=function () {
 }
 
 Game.prototype.update = function (){
+	//Here is where we will recieve a message from the server about the Javaplayers input
+
+	//androidPlayer.setXPos(recievedXPosition);
+	//androidPlayer.setYPos(recievedYPosition);
+
 	if(KeyController.isKeyDown(Key.UP))
 	{
 		if (player.getOnSurface()){
 			player.setOnSurface(false);
 			player.setYVelocity(-5);
 		}
+		if (player.getCollidingTop()){
+			player.setOnSurface(false);
+			player.setYVelocity(-.25);
+		}
 	}
 	
-	if(!player.getCollidingLeft()){
+	if(!player.getCollidingLeft() ){
 		if(KeyController.isKeyDown(Key.LEFT)){
 			if(player.getOnSurface()){
 				player.setXVelocity(-10);
@@ -79,6 +83,9 @@ function onTouchDown(e){
 }
 
 Game.prototype.checkCollisions=function (){
+	//Check player collisions
+	console.log(player.getYPos() + player.getWidth());
+	console.log(canvas.height);
 	if ((player.getYPos() + player.getWidth()) > (canvas.height - 5)){
 		player.setOnSurface(true);
 	} else{
@@ -96,6 +103,31 @@ Game.prototype.checkCollisions=function (){
 	} else{
 		player.setCollidingLeft(false);
 	}
+
+	if (player.getYPos() - (androidPlayer.getYPos() + androidPlayer.getWidth()) ){ //The Android Player is on top of the javascript player
+		player.setCollidingTop(true);
+	}else{
+		player.setCollidingTop(false);
+	}
+
+	//checkAndroidPlayer collisions
+	if ((androidPlayer.getYPos() + androidPlayer.getWidth()) > (canvas.height - 5)){
+		androidPlayer.setOnSurface(true);
+	} else{
+		androidPlayer.setOnSurface(false);
+	}
+
+	if ((androidPlayer.getXPos() + androidPlayer.getWidth()) > (canvas.width-5)){
+		androidPlayer.setCollidingRight(true);
+	} else{
+		androidPlayer.setCollidingRight(false);
+	}
+
+	if (androidPlayer.getXPos() < 5){
+		androidPlayer.setCollidingLeft(true);
+	} else{
+		androidPlayer.setCollidingLeft(false);
+	}
 }
 
 Game.prototype.gameLoop = function () 
@@ -103,7 +135,8 @@ Game.prototype.gameLoop = function ()
 	game.checkCollisions();
 	game.update();
 	game.draw();
-	player.update();
+	player.update("red");
+	androidPlayer.update("blue");
 }
 
 Game.prototype.draw =function ()
