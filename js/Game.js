@@ -84,23 +84,25 @@ function onTouchDown(e){
 
 Game.prototype.checkCollisions=function (){
 	//Check player collisions
-	console.log(player.getYPos() + player.getWidth());
-	console.log(canvas.height);
-	if ((player.getYPos() + player.getWidth()) > (canvas.height - 5)){
+	if ((player.getYPos() + player.getWidth()) > (canvas.height - 5)){ //If the player is touching the ground
 		player.setOnSurface(true);
 	} else{
 		player.setOnSurface(false);
 	}
 
-	if ((player.getXPos() + player.getWidth()) > (canvas.width-5)){
+	if ((player.getXPos() + player.getWidth()) > (canvas.width-5)){ // if the player is touching the rightmost edge
 		player.setCollidingRight(true);
-	} else{
+	}else if ((player.getXPos() + player.getWidth() > (androidPlayer.getXPos() - 3)) ){ // if the player is colliding with the other player from the left
+		player.setCollidingRight(true);
+	}else{
 		player.setCollidingRight(false);
 	}
 
-	if (player.getXPos() < 5){
+	if (player.getXPos() < 5){//if the player is colliding with the left wall
 		player.setCollidingLeft(true);
-	} else{
+	}else if ((player.getXPos-3) < (androidPlayer.getXPos() +androidPlayer.getWidth())){// if the player is colliding with the other player from the right
+		player.setCollidingLeft = true;
+	}else{
 		player.setCollidingLeft(false);
 	}
 
