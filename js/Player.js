@@ -1,4 +1,4 @@
-var playerWidth; //Since the player is a square it doesn't need two values for width and height, playerWidth represents both the height and width of the player
+var playerWidth; //Since the player is a square it doesn't need two values for width and height, playerWidth represents both height and width
 var xPos;
 var yPos;
 var xVelocity;

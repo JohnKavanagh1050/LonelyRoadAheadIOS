@@ -18,6 +18,4 @@ function GameScene(){
 	game.gameLoop();
 	if(typeof game_loop != "undefined") clearInterval(game_loop);
 		game_loop = setInterval(game.gameLoop, 60);
-
-
 }

@@ -8,9 +8,6 @@ function Scene(sceneName)
 
 Scene.prototype.draw = function()
 {
-	game.ctx.font = "100px Jing Jing";
-	game.ctx.fillText(this.title1,400,450);
-	document.body.style.backgroundColor = "#FFB6C1 "; //green
 }
 
 Scene.prototype.update = function()

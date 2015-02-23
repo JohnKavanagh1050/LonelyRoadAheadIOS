@@ -2,5 +2,5 @@ MenuScene.prototype = new Scene("MenuScene");       			// Here's where the inher
 
 function MenuScene()
 {
-
+	
 }

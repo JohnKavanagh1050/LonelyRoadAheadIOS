@@ -5,5 +5,5 @@ function main()
 	console.log("version 1");
 	sceneM = new SceneManager();
 
-	sceneM.goToScene("GameScene");
+	sceneM.goToScene("SplashScene");
 }

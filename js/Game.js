@@ -3,7 +3,7 @@ var player;
 var androidPlayer;
 var score;
 
-function Game (){
+function Game(){
 	this.loopSound = new Audio("assets/music.mp3");
 	this.loopSound.volume = .0;
 }
@@ -132,8 +132,7 @@ Game.prototype.checkCollisions=function (){
 	}
 }
 
-Game.prototype.gameLoop = function () 
-{
+Game.prototype.gameLoop = function () {
 	game.checkCollisions();
 	game.update();
 	game.draw();
@@ -141,8 +140,7 @@ Game.prototype.gameLoop = function ()
 	androidPlayer.update("blue");
 }
 
-Game.prototype.draw =function ()
-{
+Game.prototype.draw =function (){
 	ctx.fillStyle = "white";
 	ctx.fillRect(0, 0, width, height);
 	ctx.strokeStyle = "black";

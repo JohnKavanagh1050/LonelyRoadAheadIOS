@@ -2,12 +2,15 @@ SplashScene.prototype = new Scene("SplashScene");       			// Here's where the i
 
 function SplashScene()
 {
-	
-}
+	splash= new Splash();
 
-SplashScene.prototype.draw = function()
-{
-	game.ctx.font = "100px Jing Jing";
-	game.ctx.fillText("Level 1",400,450);
-	document.body.style.backgroundColor = "#00aeff"; //blue
+	splash.initCanvas();
+	
+	//ctx the drawing context, which lets you draw onto the canvas
+	//Most people call it ctx for short	
+	ctx.clearRect(0,0,canvas.width, canvas.height);
+	
+	splash.draw();
+	if(typeof game_loop != "undefined") clearInterval(game_loop);
+		game_loop = setInterval(splash.draw, 60);
 }
