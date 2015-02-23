@@ -3,34 +3,51 @@ var sceneArray;
 function SceneManager(){
 	this.sceneArray = [];
 
-	this.sceneArray.push( new SplashScene() );
-	this.sceneArray.push( new MenuScene() );
-	this.sceneArray.push( new GameScene() );
-	this.i = 0;
+	//this.sceneArray.push( new SplashScene() );
+
+	//this.i = 0;
 }
 
 SceneManager.prototype.goToNextScene = function(e){
 	this.i = (this.i + 1) % this.sceneArray.length;
 }
 
+SceneManager.prototype.addScene = function(title){
+	if (title == "GameScene"){
+		this.sceneArray.push( new GameScene() );
+	}
 
-SceneManager.prototype.goToScene = function(title1){
-	if (title1 == "SplashScene"){
+	if (title == "MenuScene"){
+		this.sceneArray.push( new MenuScene() );
+	}
+
+	if (title == "SplashScene"){
+		this.sceneArray.push( new SplashScene() );
+	}
+}
+
+SceneManager.prototype.goToScene = function(title){
+	if (title == "SplashScene"){
 		this.i =0;
 	} 
-	if (title1 == "MenuScene"){
+	if (title == "MenuScene"){
 		this.i=1;
 	}
-	if (title1 == "GameScene"){
+	if (title == "GameScene"){
 		this.i=2;
 	}
 }
 
-SceneManager.prototype.getScene = function(e){
-	if (this.i == 0) 
-		return this.sceneArray[0];
-	if (this.i == 1) 
-		return this.sceneArray[1];
-	if (this.i == 2) 
-		return this.sceneArray[2];
+SceneManager.prototype.getScene = function(title){
+	if (title == "GameScene"){
+		return this[2];
+	}
+
+	if (title == "MenuScene"){
+		return this[1];
+	}
+
+	if (title == "SplashScene"){
+		return this[0];
+	}
 }

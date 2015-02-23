@@ -3,18 +3,20 @@ function Menu (){
 	this.loopSound.volume = .0;
 }
 
-Game.prototype.initCanvas=function () { 
+Menu.prototype.initCanvas=function () { 
 	var canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	width = canvas.getAttribute("width");
 	height = canvas.getAttribute("height");
 
+	/*
 	if (touchable) {
 		canvas.addEventListener( 'touchstart', onTouchStart, false );
 	} else {
 		console.log("not touchable");
 		canvas.addEventListener("click", false);
 	};
+	*/
 
 	this.loopSound.addEventListener('ended',function()
 	{
@@ -25,7 +27,7 @@ Game.prototype.initCanvas=function () {
 	this.loopSound.play();
 }
 
-Game.prototype.update = function (){
+Menu.prototype.update = function (){
 	if(KeyController.isKeyDown(Key.UP)){
 	}
 }
@@ -34,15 +36,15 @@ function onTouchDown(e){
 	touches = e.touches;
 }
 
-Game.prototype.checkCollisions=function (){
+Menu.prototype.checkCollisions=function (){
 
 }
 
-Game.prototype.gameLoop = function () {
+Menu.prototype.gameLoop = function () {
 	
 }
 
-Game.prototype.draw =function (){
+Menu.prototype.draw =function (){
 	ctx.fillStyle = "white";
 	ctx.fillRect(0, 0, canvas.getAttribute("width"), canvas.getAttribute("height"));
 	ctx.strokeStyle = "black";

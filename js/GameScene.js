@@ -3,6 +3,8 @@ GameScene.prototype = new Scene("GameScene");  	// Here's where the inheritance 
 var game;
 
 function GameScene(){
+	
+	var fps = 60;
 	game= new Game();
 
 	game.initCanvas();
@@ -19,5 +21,5 @@ function GameScene(){
 	//start game loop
 	game.gameLoop();
 	if(typeof game_loop != "undefined") clearInterval(game_loop);
-		game_loop = setInterval(game.gameLoop, 16);
+		game_loop = setInterval(game.gameLoop, 1000/fps);
 }

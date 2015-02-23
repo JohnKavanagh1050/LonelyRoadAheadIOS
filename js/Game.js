@@ -10,12 +10,14 @@ function Game(){
 
 Game.prototype.initWorld = function(){
    	//Here is where we will have to read in the starting position of the android player
+
+
+	
    	androidPlayer = new Player(720,420);
    	player = new Player(20, 20);
 }
 
 Game.prototype.initCanvas=function () { 
-	
 	var canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	width = canvas.getAttribute("width");
@@ -25,7 +27,7 @@ Game.prototype.initCanvas=function () {
 		canvas.addEventListener( 'touchstart', onTouchStart, false );
 	} else {
 		console.log("not touchable");
-		canvas.addEventListener("click", false);
+		//canvas.addEventListener("click", false);
 	};
 
 	this.loopSound.addEventListener('ended',function()
