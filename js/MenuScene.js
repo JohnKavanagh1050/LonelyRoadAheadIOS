@@ -1,6 +1,6 @@
-MiddleScene.prototype = new Scene("MiddleScene");       			// Here's where the inheritance occurs 
+MenuScene.prototype = new Scene("MenuScene");       			// Here's where the inheritance occurs 
 
-function MiddleScene()
+function MenuScene()
 {
 
 }

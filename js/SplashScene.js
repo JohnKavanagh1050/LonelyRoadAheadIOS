@@ -1,6 +1,6 @@
-OpeningScene.prototype = new Scene("OpeningScene");       			// Here's where the inheritance occurs 
+SplashScene.prototype = new Scene("SplashScene");       			// Here's where the inheritance occurs 
 
-function OpeningScene()
+function SplashScene()
 {
 	
 }

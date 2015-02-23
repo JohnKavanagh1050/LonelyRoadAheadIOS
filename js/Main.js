@@ -6,9 +6,4 @@ function main()
 	sceneM = new SceneManager();
 
 	sceneM.goToScene("GameScene");
-
-	//assetManager = new AssetManager();
-	//assetManager.queueDownload("img/SnakeCreeping.png");
-	
-	//assetManager.downloadAll(function() {
 }

@@ -1,4 +1,4 @@
-GameScene.prototype = new Scene("GameScene");       			// Here's where the inheritance occurs 
+GameScene.prototype = new Scene("GameScene");  	// Here's where the inheritance occurs 
 
 function GameScene(){
 	game= new Game();
