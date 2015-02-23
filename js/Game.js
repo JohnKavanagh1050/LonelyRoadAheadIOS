@@ -99,6 +99,7 @@ Game.prototype.checkCollisions=function (){
 
 	if ((player.getXPos() + player.getWidth()) > (canvas.width-5)){ // if the player is touching the rightmost edge
 		player.setCollidingRight(true);
+		player.setPosition(canvas.width - prettynessOffset - player.getWidth(), player.getYPos());
 	}else if ( 	(player.getXPos() + player.getWidth() > (androidPlayer.getXPos() - 3)) &&
 				((player.getYPos() + player.getWidth()) - (androidPlayer.getYPos())>2) ){ // if the player is colliding with the other player from the left
 		player.setCollidingRight(true);
@@ -133,6 +134,7 @@ Game.prototype.checkCollisions=function (){
 
 	if ((androidPlayer.getXPos() + androidPlayer.getWidth()) > (canvas.width-5)){
 		androidPlayer.setCollidingRight(true);
+		androidPlayer.setPosition(canvas.width - prettynessOffset - androidPlayer.getWidth(), androidPlayer.getYPos());
 	} else{
 		androidPlayer.setCollidingRight(false);
 	}
@@ -144,7 +146,8 @@ Game.prototype.checkCollisions=function (){
 	}
 
 	if ((Math.abs(androidPlayer.getYPos() - (player.getYPos() + player.getWidth())) < 5) && 
-		(Math.abs((androidPlayer.getXPos() + player.getWidth()) - (player.getXPos() + player.getWidth())) < 5) ){ //The javascript Player is on top of the android player
+		((player.getXPos() + player.getWidth()) > androidPlayer.getXPos())					 &&
+		(player.getXPos() < (androidPlayer.getXPos() + androidPlayer.getWidth() )) ){ //The javascript Player is on top of the android player
 		androidPlayer.setCollidingTop(true);
 		player.setOnSurface(true);
 		player.setPosition(player.getXPos(), (androidPlayer.getYPos() - prettynessOffset - player.getWidth()) );
