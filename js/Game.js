@@ -4,10 +4,13 @@ var androidPlayer;
 var prettynessOffset; // A slight offset to not have the lines of the player overlap with the boundry lines of the game
 var score;
 
-function Game(){
+function Game(multiplayer){
 	this.loopSound = new Audio("assets/music.mp3");
-	this.loopSound.volume = .0;
+	this.loopSound.volume = .2;
 	prettynessOffset = 2;
+	if(multiplayer){
+		joinMultiplayerGame();
+	}
 }
 
 Game.prototype.initWorld = function(){
@@ -30,7 +33,7 @@ Game.prototype.initCanvas=function () {
 	};
 
 	this.loopSound.addEventListener('ended',function(){
-		game.loopSound.currentTime=0;
+		game.loopSound.currentTime = 0;
 		game.loopSound.play();
 	},false);
 	
@@ -56,6 +59,8 @@ Game.prototype.update = function (){
 
 	if(KeyController.isKeyDown(Key.SPACE)){
 		if (player.getOnSurface()){
+			var jumpSoundEffect = new Audio("assets/jump.mp3");
+			jumpSoundEffect.play();
 			player.setOnSurface(false);
 			player.setYVelocity(-5);
 		}
@@ -82,6 +87,9 @@ Game.prototype.update = function (){
 			}
 		}
 	}
+
+	playerInfo = player.getInfo();
+	//game.net.send(playerInfo);
 }
 
 function onTouchDown(e){
@@ -175,4 +183,8 @@ Game.prototype.draw =function (){
 	ctx.fillRect(0, 0, width, height);
 	ctx.strokeStyle = "black";
 	ctx.strokeRect(0, 0, width, height);
+}
+
+Game.prototype.joinMultiplayerGame = function(){
+	net = new Client();
 }

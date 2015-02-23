@@ -109,3 +109,9 @@ Player.prototype.drawPlayer = function(x,y, color){ //Draw method for the player
 	ctx.strokeStyle = "white";
 	ctx.strokeRect(x, y, this.playerWidth, this.playerWidth);
 };
+
+Player.prototype.getInfo = function(){
+	this.sendInfo = [];
+	sendInfo = [xPos, yPos, xVelocity, yVelocity];
+	return sendInfo;
+}

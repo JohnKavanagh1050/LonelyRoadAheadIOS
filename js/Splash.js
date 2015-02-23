@@ -5,9 +5,12 @@ var aspectRatioHeight;
 var finished;
 
 function Splash(){
-	aspectRatioHeight = 0;
-	aspectRatioWidth = 0;
-	finished = false;
+	this.aspectRatioHeight = 0;
+	this.aspectRatioWidth = 0;
+	this.finished = false;
+	
+	var snd = new Audio("assets/splashSound.mp3");
+	snd.play();
 }
 
 Splash.prototype.initCanvas = function(){
@@ -36,9 +39,9 @@ Splash.prototype.draw = function(){
 }
 
 Splash.prototype.getFinished = function(){
-	return finished;
+	return this.finished;
 }
 
 Splash.prototype.setFinished = function(pFinished){
-	finished = pFinished;
+	this.finished = pFinished;
 }

@@ -2,7 +2,6 @@ var scene;
 var title;
 
 function Scene(){
-	
 }
 
 function Scene(sceneName)

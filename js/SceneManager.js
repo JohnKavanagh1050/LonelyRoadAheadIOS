@@ -1,10 +1,14 @@
 var sceneArray;
+var currentScene;
 
 function SceneManager(){
 	this.sceneArray = [];
 
+	//this.sceneArray.push( new SplashScene());
+	//this.sceneArray.push( new MenuScene() );
+	//this.sceneArray.push( new GameScene() );
 	//this.sceneArray.push( new SplashScene() );
-
+	currentScene = this.sceneArray[0];
 	//this.i = 0;
 }
 
@@ -23,6 +27,7 @@ SceneManager.prototype.addScene = function(title){
 
 	if (title == "SplashScene"){
 		this.sceneArray.push( new SplashScene() );
+		currentScene = this.sceneArray[0];
 	}
 }
 
@@ -39,5 +44,5 @@ SceneManager.prototype.goToScene = function(title){
 }
 
 SceneManager.prototype.getCurrentScene = function(){
-	return this.i;
+	return currentScene;
 }

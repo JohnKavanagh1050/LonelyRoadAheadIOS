@@ -13,7 +13,7 @@ function SplashScene()
 	ctx.clearRect(0,0,canvas.width, canvas.height);
 	var x = 0;
 
-	setInterval(onTimerTick, 1000/fps); 
+	var loopID = setInterval(onTimerTick, 1000/fps); 
 
 	function onTimerTick() {
 		if(x<1){
@@ -21,6 +21,12 @@ function SplashScene()
     		x+= 1/(fps*2);
     	}else{
     		splash.setFinished(true);
+    		console.log("setting splash finished to true");
+    		clearInterval(loopID);
     	}
 	}
+}
+
+SplashScene.prototype.getFinished = function(){
+	return splash.getFinished();
 }

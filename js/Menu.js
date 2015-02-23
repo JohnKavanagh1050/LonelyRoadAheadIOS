@@ -4,7 +4,7 @@ var optionsIMG;
 
 function Menu (){
 	this.loopSound = new Audio("assets/mainMenuMusic.mp3");
-	this.loopSound.volume = .1;
+	this.loopSound.volume = .2;
 }
 
 Menu.prototype.initCanvas=function () { 
