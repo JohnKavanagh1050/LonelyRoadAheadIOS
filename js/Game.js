@@ -1,18 +1,17 @@
 var ctx;
 var player;
 var androidPlayer;
+var prettynessOffset; // A slight offset to not have the lines of the player overlap with the boundry lines of the game
 var score;
 
 function Game(){
 	this.loopSound = new Audio("assets/music.mp3");
 	this.loopSound.volume = .0;
+	prettynessOffset = 2;
 }
 
 Game.prototype.initWorld = function(){
-   	//Here is where we will have to read in the starting position of the android player
-
-
-	
+   	//Here is where we will have to read in the starting position of the android player	
    	androidPlayer = new Player(720,420);
    	player = new Player(20, 20);
 }
@@ -30,8 +29,7 @@ Game.prototype.initCanvas=function () {
 		//canvas.addEventListener("click", false);
 	};
 
-	this.loopSound.addEventListener('ended',function()
-	{
+	this.loopSound.addEventListener('ended',function(){
 		game.loopSound.currentTime=0;
 		game.loopSound.play();
 	},false);
@@ -45,15 +43,21 @@ Game.prototype.update = function (){
 	//androidPlayer.setXPos(recievedXPosition);
 	//androidPlayer.setYPos(recievedYPosition);
 
-	if(KeyController.isKeyDown(Key.UP))
-	{
+	if(KeyController.isKeyDown(Key.UP)){
+		if (androidPlayer.getOnSurface()){
+			androidPlayer.setXVelocity(-10);
+		}
+	}
+	if(KeyController.isKeyDown(Key.DOWN)){
+		if (androidPlayer.getOnSurface()){
+			androidPlayer.setXVelocity(10);
+		}
+	}
+
+	if(KeyController.isKeyDown(Key.SPACE)){
 		if (player.getOnSurface()){
 			player.setOnSurface(false);
 			player.setYVelocity(-5);
-		}
-		if (player.getCollidingTop()){
-			player.setOnSurface(false);
-			player.setYVelocity(-.25);
 		}
 	}
 	
@@ -88,13 +92,15 @@ Game.prototype.checkCollisions=function (){
 	//Check player collisions
 	if ((player.getYPos() + player.getWidth()) > (canvas.height - 5)){ //If the player is touching the ground
 		player.setOnSurface(true);
+		player.setPosition(player.getXPos(), canvas.height - prettynessOffset - player.getWidth());
 	} else{
 		player.setOnSurface(false);
 	}
 
 	if ((player.getXPos() + player.getWidth()) > (canvas.width-5)){ // if the player is touching the rightmost edge
 		player.setCollidingRight(true);
-	}else if ((player.getXPos() + player.getWidth() > (androidPlayer.getXPos() - 3)) ){ // if the player is colliding with the other player from the left
+	}else if ( 	(player.getXPos() + player.getWidth() > (androidPlayer.getXPos() - 3)) &&
+				((player.getYPos() + player.getWidth()) - (androidPlayer.getYPos())>2) ){ // if the player is colliding with the other player from the left
 		player.setCollidingRight(true);
 	}else{
 		player.setCollidingRight(false);
@@ -102,13 +108,16 @@ Game.prototype.checkCollisions=function (){
 
 	if (player.getXPos() < 5){//if the player is colliding with the left wall
 		player.setCollidingLeft(true);
-	}else if ((player.getXPos-3) < (androidPlayer.getXPos() +androidPlayer.getWidth())){// if the player is colliding with the other player from the right
-		player.setCollidingLeft = true;
+		player.setPosition(prettynessOffset, player.getYPos());
+	}else if ( 	(player.getXPos() - (androidPlayer.getXPos() + androidPlayer.getWidth()) < 5) &&
+				((player.getYPos() + player.getWidth()) - (androidPlayer.getYPos())>2) ){ // if the player is colliding with the other player from the left
+		player.setCollidingLeft(true);
 	}else{
 		player.setCollidingLeft(false);
 	}
 
-	if (player.getYPos() - (androidPlayer.getYPos() + androidPlayer.getWidth()) ){ //The Android Player is on top of the javascript player
+	if ((Math.abs(player.getYPos() - (androidPlayer.getYPos() + androidPlayer.getWidth())) < 5) && 
+		(Math.abs(player.getXPos() - (androidPlayer.getXPos() + androidPlayer.getWidth())) < 5)){ //The Android Player is on top of the javascript player
 		player.setCollidingTop(true);
 	}else{
 		player.setCollidingTop(false);
@@ -117,6 +126,7 @@ Game.prototype.checkCollisions=function (){
 	//checkAndroidPlayer collisions
 	if ((androidPlayer.getYPos() + androidPlayer.getWidth()) > (canvas.height - 5)){
 		androidPlayer.setOnSurface(true);
+		androidPlayer.setPosition(androidPlayer.getXPos(), canvas.height - prettynessOffset - androidPlayer.getWidth());
 	} else{
 		androidPlayer.setOnSurface(false);
 	}
@@ -131,6 +141,15 @@ Game.prototype.checkCollisions=function (){
 		androidPlayer.setCollidingLeft(true);
 	} else{
 		androidPlayer.setCollidingLeft(false);
+	}
+
+	if ((Math.abs(androidPlayer.getYPos() - (player.getYPos() + player.getWidth())) < 5) && 
+		(Math.abs((androidPlayer.getXPos() + player.getWidth()) - (player.getXPos() + player.getWidth())) < 5) ){ //The javascript Player is on top of the android player
+		androidPlayer.setCollidingTop(true);
+		player.setOnSurface(true);
+		player.setPosition(player.getXPos(), (androidPlayer.getYPos() - prettynessOffset - player.getWidth()) );
+	}else{
+		androidPlayer.setCollidingTop(false);
 	}
 }
 

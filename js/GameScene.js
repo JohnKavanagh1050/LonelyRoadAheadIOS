@@ -1,9 +1,10 @@
 GameScene.prototype = new Scene("GameScene");  	// Here's where the inheritance occurs 
 
 var game;
+var title;
 
 function GameScene(){
-	
+	title = "gameScene";
 	var fps = 60;
 	game= new Game();
 

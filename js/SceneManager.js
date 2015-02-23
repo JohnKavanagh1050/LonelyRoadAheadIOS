@@ -38,16 +38,6 @@ SceneManager.prototype.goToScene = function(title){
 	}
 }
 
-SceneManager.prototype.getScene = function(title){
-	if (title == "GameScene"){
-		return this[2];
-	}
-
-	if (title == "MenuScene"){
-		return this[1];
-	}
-
-	if (title == "SplashScene"){
-		return this[0];
-	}
+SceneManager.prototype.getCurrentScene = function(){
+	return this.i;
 }

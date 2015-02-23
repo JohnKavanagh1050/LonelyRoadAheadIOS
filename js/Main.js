@@ -4,10 +4,12 @@ function main()
 	//change version number if you suspect a problem with caching
 	console.log("version 1");
 	sceneM = new SceneManager();
-	sceneM.addScene("SplashScene");
+	sceneM.addScene("GameScene");
+	/*
 	currentScene = new Scene();
-	currentScene = sceneM.getScene("SplashScene");
+	currentScene = sceneM.getCurrentScene();
 	if(currentScene.getFinished()){
 		sceneM.addScene("GameScene");
 	}
+	*/
 }

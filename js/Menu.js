@@ -36,14 +36,6 @@ function onTouchDown(e){
 	touches = e.touches;
 }
 
-Menu.prototype.checkCollisions=function (){
-
-}
-
-Menu.prototype.gameLoop = function () {
-	
-}
-
 Menu.prototype.draw =function (){
 	ctx.fillStyle = "white";
 	ctx.fillRect(0, 0, canvas.getAttribute("width"), canvas.getAttribute("height"));
